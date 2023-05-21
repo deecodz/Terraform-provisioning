@@ -13,10 +13,9 @@ variable "final-proj-vpc" {
   type        = string
 }
 
-# Define the Grafana security group
-resource "aws_security_group" "grafana" {
-  name        = "grafana"
-  description = "Grafana Security Group"
+resource "aws_security_group" "my-security-group" {
+  name        = var.security_group_name
+  description = var.security_group_description
   vpc_id      = var.final-proj-vpc
 
   ingress {
@@ -25,13 +24,6 @@ resource "aws_security_group" "grafana" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the Node-exporter security group
-resource "aws_security_group" "node_exporter" {
-  name        = "node-exporter"
-  description = "Node-exporter Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 9100
@@ -39,13 +31,6 @@ resource "aws_security_group" "node_exporter" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the SSH security group
-resource "aws_security_group" "ssh" {
-  name        = "ssh"
-  description = "SSH Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 22
@@ -53,13 +38,6 @@ resource "aws_security_group" "ssh" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the HTTP security group
-resource "aws_security_group" "http" {
-  name        = "http"
-  description = "HTTP Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 80
@@ -67,13 +45,6 @@ resource "aws_security_group" "http" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the Jenkins and the likes security group
-resource "aws_security_group" "jenkins" {
-  name        = "jenkins"
-  description = "Jenkins Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 8080
@@ -81,13 +52,6 @@ resource "aws_security_group" "jenkins" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the prometheus/nagios security group
-resource "aws_security_group" "prometheus" {
-  name        = "prometheus"
-  description = "Prometheus Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 9090
@@ -95,13 +59,6 @@ resource "aws_security_group" "prometheus" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the Flask security group
-resource "aws_security_group" "flask" {
-  name        = "flask"
-  description = "Flask Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 5000
@@ -109,13 +66,6 @@ resource "aws_security_group" "flask" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-# Define the HTTPS security group
-resource "aws_security_group" "https" {
-  name        = "https"
-  description = "HTTPS Security Group"
-  vpc_id      = var.final-proj-vpc
 
   ingress {
     from_port   = 443
@@ -125,44 +75,8 @@ resource "aws_security_group" "https" {
   }
 }
 
-
-output "grafana_sg_id" {
-  description = "ID of the Grafana security group"
-  value       = aws_security_group.grafana.id
-}
-
-output "node_exporter_sg_id" {
-  description = "ID of the Node-exporter security group"
-  value       = aws_security_group.node_exporter.id
-}
-
-output "ssh_sg_id" {
-  description = "ID of the SSH security group"
-  value       = aws_security_group.ssh.id
-}
-
-output "http_sg_id" {
-  description = "ID of the HTTP security group"
-  value       = aws_security_group.http.id
-}
-
-output "jenkins_sg_id" {
-  description = "ID of the Jenkins security group"
-  value       = aws_security_group.jenkins.id
-}
-
-output "prometheus_sg_id" {
-  description = "ID of the Prometheus security group"
-  value       = aws_security_group.prometheus.id
-}
-
-output "flask_sg_id" {
-  description = "ID of the Flask security group"
-  value       = aws_security_group.flask.id
-}
-
-output "https_sg_id" {
-  description = "ID of the HTTPS security group"
-  value       = aws_security_group.https.id
+output "my-security-group-id" {
+  description = "ID of the security group"
+  value       = aws_security_group.my-security-group.id
 }
 

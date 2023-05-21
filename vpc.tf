@@ -133,16 +133,7 @@ resource "aws_instance" "final-proj-instance" {
   instance_type              = "t2.medium" 
   key_name                   = "docs" 
   subnet_id                  = aws_subnet.final-proj-pub-subnet[count.index].id
-  vpc_security_group_ids     = [ 
-    module.my_security_groups.grafana_sg_id,
-    module.my_security_groups.node_exporter_sg_id,
-    module.my_security_groups.ssh_sg_id,
-    module.my_security_groups.http_sg_id,
-    module.my_security_groups.jenkins_sg_id,
-    module.my_security_groups.prometheus_sg_id,
-    module.my_security_groups.flask_sg_id,
-    module.my_security_groups.https_sg_id
-]
+  vpc_security_group_ids     = [module.my_security_groups.my-security-group-id]
   
   iam_instance_profile = aws_iam_instance_profile.final-proj-admin-profile.name
   
