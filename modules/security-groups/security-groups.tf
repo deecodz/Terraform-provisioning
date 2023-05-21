@@ -98,7 +98,17 @@ resource "aws_security_group" "my-security-group" {
       description = ingress.value.name
     }
   }
+
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+    description     = "Allow all outbound traffic"
+  }
 }
+
 
 output "my-security-group-id" {
   description = "ID of the security group"
