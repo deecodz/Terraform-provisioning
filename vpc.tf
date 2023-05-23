@@ -102,7 +102,7 @@ resource "aws_route" "final-proj-pub_default_route" {
 
 # create IAM role for ec2
 resource "aws_iam_role" "final-proj-admin-role" {
-  name               = "admin-role"
+  name               = "k8s-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -120,11 +120,18 @@ resource "aws_iam_role" "final-proj-admin-role" {
 EOF
 }
 
+# Attach the AdministratorAccess policy to the role
+resource "aws_iam_role_policy_attachment" "final-proj-admin-attach" {
+  role       = aws_iam_role.final-proj-admin-role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 # role profile
 resource "aws_iam_instance_profile" "final-proj-admin-profile" {
-  name  = "admin-profile"
+  name = "admin-profile"
   role = aws_iam_role.final-proj-admin-role.name
 }
+
 
 # Create EC2 instances in public subnets
 resource "aws_instance" "final-proj-instance" {
