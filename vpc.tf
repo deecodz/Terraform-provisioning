@@ -4,7 +4,7 @@ provider "aws" {
 
 # Environment Variables and module
 variable "instance_count" {
-  default = 
+  default = 2
 }
 
 variable "availability_zones" {
