@@ -4,11 +4,11 @@ provider "aws" {
 
 # Environment Variables and module
 variable "instance_count" {
-  default = 3
+  default = 
 }
 
 variable "availability_zones" {
-  default = ["us-east-1a", "us-east-1b", "us-east-1a"]  
+  default = ["us-east-1a", "us-east-1b"]  
 }
 
 module "my_security_groups" {
